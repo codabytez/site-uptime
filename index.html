@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Puppy Dreams Status</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><circle cx='8' cy='8' r='7' fill='%2322a06b'/></svg>">
+<style>
+  :root {
+    --bg: #f6f7f9;
+    --surface: #ffffff;
+    --border: #e3e6eb;
+    --text: #1b1f24;
+    --muted: #5f6b7a;
+    --up: #1f9d61;
+    --slow: #c98a06;
+    --down: #d6373a;
+    --none: #d5d9df;
+    --up-soft: #e6f5ee;
+    --slow-soft: #fdf4e0;
+    --down-soft: #fcebeb;
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0f1216;
+      --surface: #171b21;
+      --border: #272d36;
+      --text: #e7eaee;
+      --muted: #97a1ad;
+      --up: #35c07f;
+      --slow: #e3a82b;
+      --down: #f0585b;
+      --none: #323944;
+      --up-soft: #16301f;
+      --slow-soft: #332811;
+      --down-soft: #3a1a1b;
+      color-scheme: dark;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font: 15px/1.45 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+  main { max-width: 1100px; margin: 0 auto; padding: 32px 16px 64px; }
+  header { display: flex; flex-wrap: wrap; gap: 12px; align-items: baseline; justify-content: space-between; }
+  h1 { font-size: 24px; margin: 0; letter-spacing: -0.01em; }
+  .meta { color: var(--muted); font-size: 13px; }
+  .banner {
+    margin: 20px 0 24px;
+    padding: 16px 18px;
+    border-radius: 12px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .banner.up { background: var(--up-soft); color: var(--up); }
+  .banner.slow { background: var(--slow-soft); color: var(--slow); }
+  .banner.down { background: var(--down-soft); color: var(--down); }
+  .totals { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin-bottom: 24px; }
+  .tile { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 14px 16px; }
+  .tile .label { color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; }
+  .tile .value { font-size: 26px; font-weight: 650; font-variant-numeric: tabular-nums; }
+  .toolbar { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+  .toolbar button, .toolbar input {
+    font: inherit;
+    font-size: 14px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--text);
+    border-radius: 999px;
+    padding: 6px 14px;
+  }
+  .toolbar input { border-radius: 8px; flex: 1 1 200px; min-width: 0; }
+  .toolbar button { cursor: pointer; }
+  .toolbar button[aria-pressed="true"] { background: var(--text); color: var(--bg); border-color: var(--text); }
+  h2 { font-size: 13px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; margin: 28px 0 10px; }
+  .list { display: grid; gap: 10px; }
+  .site {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--none);
+    border-radius: 12px;
+    padding: 14px 16px;
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 2fr) 250px;
+    gap: 16px;
+    align-items: center;
+  }
+  .site.up { border-left-color: var(--up); }
+  .site.slow { border-left-color: var(--slow); }
+  .site.down { border-left-color: var(--down); }
+  .name { font-weight: 600; display: flex; align-items: center; gap: 8px; }
+  .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--none); flex: none; }
+  .up .dot { background: var(--up); }
+  .slow .dot { background: var(--slow); }
+  .down .dot { background: var(--down); box-shadow: 0 0 0 4px var(--down-soft); }
+  .url { color: var(--muted); font-size: 13px; text-decoration: none; overflow-wrap: anywhere; }
+  .url:hover { text-decoration: underline; }
+  .err { color: var(--down); font-size: 13px; margin-top: 4px; }
+  .bars { display: flex; gap: 2px; height: 28px; align-items: stretch; }
+  .bars span { flex: 1; border-radius: 2px; background: var(--none); min-width: 2px; }
+  .bars span.ok { background: var(--up); }
+  .bars span.slow { background: var(--slow); }
+  .bars span.bad { background: var(--down); }
+  .bars-caption { display: flex; justify-content: space-between; color: var(--muted); font-size: 11px; margin-top: 4px; }
+  .stats { display: grid; grid-template-columns: 1.3fr 1fr 1fr 0.7fr; gap: 4px 18px; text-align: right; font-variant-numeric: tabular-nums; }
+  .stats .k { color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: 0.04em; }
+  .stats .v { font-weight: 600; font-size: 14px; }
+  .warn { color: var(--slow); }
+  .bad-text { color: var(--down); }
+  .empty { color: var(--muted); padding: 40px 0; text-align: center; }
+  @media (max-width: 760px) {
+    .site { grid-template-columns: 1fr; }
+    .stats { grid-template-columns: repeat(4, 1fr); text-align: left; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>Puppy Dreams Status</h1>
+    <div class="meta" id="updated">Loading…</div>
+  </header>
+
+  <div class="banner" id="banner" hidden></div>
+  <div class="totals" id="totals"></div>
+
+  <div class="toolbar" id="toolbar">
+    <input id="search" type="search" placeholder="Search sites…" aria-label="Search sites">
+  </div>
+
+  <div id="groups"></div>
+</main>
+
+<script>
+const REFRESH_MS = 60000;
+let data = null;
+let filter = "all";
+let query = "";
+
+const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const pct = (v) => (v == null ? "—" : `${v.toFixed(v === 100 ? 0 : 2)}%`);
+
+function ago(iso) {
+  const s = Math.max(0, Math.round((Date.now() - new Date(iso)) / 1000));
+  if (s < 60) return `${s}s ago`;
+  const m = Math.round(s / 60);
+  if (m < 60) return `${m} min ago`;
+  const h = Math.round(m / 60);
+  if (h < 48) return `${h} h ago`;
+  return `${Math.round(h / 24)} days ago`;
+}
+
+function duration(iso) {
+  const m = Math.round((Date.now() - new Date(iso)) / 60000);
+  if (m < 60) return `${m} min`;
+  if (m < 60 * 48) return `${Math.round(m / 60)} h`;
+  return `${Math.round(m / 1440)} days`;
+}
+
+function renderTotals(sites) {
+  const down = sites.filter((s) => s.status === "down").length;
+  const slow = sites.filter((s) => s.status === "slow").length;
+  const avgUptime = sites.filter((s) => s.uptime.day != null);
+  const uptimeDay = avgUptime.length ? avgUptime.reduce((a, s) => a + s.uptime.day, 0) / avgUptime.length : null;
+  const times = sites.filter((s) => s.status !== "down").map((s) => s.ms);
+
+  const banner = $("banner");
+  banner.hidden = false;
+  if (down) {
+    banner.className = "banner down";
+    banner.textContent = `${down} of ${sites.length} site${sites.length > 1 ? "s" : ""} down`;
+  } else if (slow) {
+    banner.className = "banner slow";
+    banner.textContent = `All sites up, ${slow} responding slowly`;
+  } else {
+    banner.className = "banner up";
+    banner.textContent = `All ${sites.length} sites operational`;
+  }
+
+  $("totals").innerHTML = [
+    ["Sites", sites.length],
+    ["Up", sites.length - down],
+    ["Down", down, down ? "bad-text" : ""],
+    ["Uptime (24h)", pct(uptimeDay)],
+    ["Avg response", times.length ? `${Math.round(times.reduce((a, b) => a + b, 0) / times.length)} ms` : "—"],
+  ].map(([k, v, cls = ""]) => `<div class="tile"><div class="label">${k}</div><div class="value ${cls}">${v}</div></div>`).join("");
+}
+
+function renderToolbar(sites) {
+  const counts = { all: sites.length, down: 0, slow: 0, up: 0 };
+  sites.forEach((s) => counts[s.status]++);
+  const buttons = [["all", "All"], ["down", "Down"], ["slow", "Slow"], ["up", "Up"]]
+    .map(([key, label]) => `<button data-filter="${key}" aria-pressed="${filter === key}">${label} ${counts[key]}</button>`).join("");
+  const toolbar = $("toolbar");
+  toolbar.querySelectorAll("button").forEach((b) => b.remove());
+  toolbar.insertAdjacentHTML("afterbegin", buttons);
+}
+
+function siteRow(s) {
+  const bars = s.recent.map(([t, ok, ms]) => {
+    const cls = !ok ? "bad" : ms > 5000 ? "slow" : "ok";
+    const when = new Date(t).toLocaleString();
+    return `<span class="${cls}" title="${esc(when)} — ${ok ? `${ms} ms` : "down"}"></span>`;
+  }).join("");
+  const firstT = s.recent[0]?.[0];
+  const ssl = s.sslDaysLeft == null
+    ? "—"
+    : `<span class="${s.sslDaysLeft < 7 ? "bad-text" : s.sslDaysLeft < 21 ? "warn" : ""}">${s.sslDaysLeft}d</span>`;
+  const stateText = s.status === "down"
+    ? `Down for ${duration(s.since)}`
+    : `Up for ${duration(s.since)}`;
+
+  return `
+    <article class="site ${s.status}">
+      <div>
+        <div class="name"><span class="dot" aria-hidden="true"></span>${esc(s.name)}</div>
+        <a class="url" href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.url.replace(/^https?:\/\//, ""))}</a>
+        <div class="meta">${stateText}</div>
+        ${s.error ? `<div class="err">${esc(s.error)}</div>` : ""}
+      </div>
+      <div>
+        <div class="bars" role="img" aria-label="Last ${s.recent.length} checks">${bars}</div>
+        <div class="bars-caption"><span>${firstT ? ago(new Date(firstT).toISOString()) : ""}</span><span>now</span></div>
+      </div>
+      <div class="stats">
+        <div class="k">Response</div><div class="k">24h</div><div class="k">7d</div><div class="k">SSL</div>
+        <div class="v">${s.status === "down" ? "—" : `${s.ms} ms`}</div>
+        <div class="v">${pct(s.uptime.day)}</div>
+        <div class="v">${pct(s.uptime.week)}</div>
+        <div class="v">${ssl}</div>
+      </div>
+    </article>`;
+}
+
+function renderSites(sites) {
+  const q = query.trim().toLowerCase();
+  const shown = sites
+    .filter((s) => filter === "all" || s.status === filter)
+    .filter((s) => !q || s.name.toLowerCase().includes(q) || s.url.toLowerCase().includes(q))
+    // Problems first, then alphabetical.
+    .sort((a, b) => ({ down: 0, slow: 1, up: 2 }[a.status] - { down: 0, slow: 1, up: 2 }[b.status]) || a.name.localeCompare(b.name));
+
+  if (!shown.length) {
+    $("groups").innerHTML = `<div class="empty">No sites match.</div>`;
+    return;
+  }
+  // Groups keep the order they first appear in sites.json.
+  const groups = new Map(sites.map((s) => [s.group, []]));
+  shown.forEach((s) => groups.get(s.group).push(s));
+  $("groups").innerHTML = [...groups].filter(([, list]) => list.length).map(([group, list]) =>
+    `<h2>${esc(group)} · ${list.length}</h2><div class="list">${list.map(siteRow).join("")}</div>`).join("");
+}
+
+function render() {
+  if (!data) return;
+  $("updated").textContent = `Last checked ${ago(data.generatedAt)} · refreshes automatically`;
+  renderTotals(data.sites);
+  renderToolbar(data.sites);
+  renderSites(data.sites);
+  const down = data.sites.filter((s) => s.status === "down").length;
+  document.title = down ? `(${down} down) Puppy Dreams Status` : "Puppy Dreams Status";
+}
+
+async function load() {
+  try {
+    const res = await fetch(`data/summary.json?t=${Date.now()}`, { cache: "no-store" });
+    if (!res.ok) throw new Error(res.status);
+    data = await res.json();
+    render();
+  } catch {
+    if (!data) {
+      $("updated").textContent = "No data yet — the first check hasn't run.";
+      $("groups").innerHTML = `<div class="empty">Waiting for the first uptime check. Run the “Uptime check” workflow in GitHub Actions.</div>`;
+    }
+  }
+}
+
+$("toolbar").addEventListener("click", (e) => {
+  const btn = e.target.closest("button[data-filter]");
+  if (!btn) return;
+  filter = btn.dataset.filter;
+  render();
+});
+$("search").addEventListener("input", (e) => { query = e.target.value; render(); });
+
+load();
+setInterval(load, REFRESH_MS);
+setInterval(render, 15000); // keep "x min ago" text fresh between loads
+</script>
+</body>
+</html>
