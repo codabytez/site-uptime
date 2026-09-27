@@ -1,0 +1,141 @@
+{
+  "generatedAt": "2026-09-27T04:39:21.067Z",
+  "graceMinutes": 30,
+  "stores": [
+    {
+      "name": "Carrollton",
+      "url": "https://carrollton.puppydreams.com",
+      "group": "Texas",
+      "locationId": 5174,
+      "checkedAt": "2026-09-27T04:39:21.067Z",
+      "status": "error",
+      "error": "Pinogy login failed: HTTP 403 from /apps/any/sessions: {\"error\": \"ERR_BAD_KEY\", \"request\": {\"method\": \"POST\", \"params\": {}}, \"httperror\": {\"name\": \"HTTPForbidden\", \"code\": 403}, \"message\": \"Wrong credentials\", \"data\": {}}"
+    },
+    {
+      "name": "Arlington",
+      "url": "https://arlington.puppydreams.com",
+      "group": "Texas",
+      "locationId": 1014,
+      "checkedAt": "2026-09-27T04:39:21.067Z",
+      "status": "error",
+      "error": "Pinogy login failed: HTTP 403 from /apps/any/sessions: {\"error\": \"ERR_BAD_KEY\", \"request\": {\"method\": \"POST\", \"params\": {}}, \"httperror\": {\"name\": \"HTTPForbidden\", \"code\": 403}, \"message\": \"Wrong credentials\", \"data\": {}}"
+    },
+    {
+      "name": "Garland",
+      "url": "https://garland.puppydreams.com",
+      "group": "Texas",
+      "locationId": 2151,
+      "checkedAt": "2026-09-27T04:39:21.067Z",
+      "status": "error",
+      "error": "Pinogy login failed: HTTP 403 from /apps/any/sessions: {\"error\": \"ERR_BAD_KEY\", \"request\": {\"method\": \"POST\", \"params\": {}}, \"httperror\": {\"name\": \"HTTPForbidden\", \"code\": 403}, \"message\": \"Wrong credentials\", \"data\": {}}"
+    },
+    {
+      "name": "Denton",
+      "url": "https://denton.puppydreams.com",
+      "group": "Texas",
+      "locationId": 7120,
+      "checkedAt": "2026-09-27T04:39:21.067Z",
+      "status": "error",
+      "error": "Pinogy login failed: HTTP 403 from /apps/any/sessions: {\"error\": \"ERR_BAD_KEY\", \"request\": {\"method\": \"POST\", \"params\": {}}, \"httperror\": {\"name\": \"HTTPForbidden\", \"code\": 403}, \"message\": \"Wrong credentials\", \"data\": {}}"
+    },
+    {
+      "name": "Mansfield",
+      "url": "https://mansfield.puppydreams.com",
+      "group": "Texas",
+      "locationId": 15262,
+      "checkedAt": "2026-09-27T04:39:21.067Z",
+      "status": "error",
+      "error": "Pinogy login failed: HTTP 403 from /apps/any/sessions: {\"error\": \"ERR_BAD_KEY\", \"request\": {\"method\": \"POST\", \"params\": {}}, \"httperror\": {\"name\": \"HTTPForbidden\", \"code\": 403}, \"message\": \"Wrong credentials\", \"data\": {}}"
+    },
+    {
+      "name": "North Richland Hills",
+      "url": "https://northrichlandhills.puppydreams.com",
+      "group": "Texas",
+      "locationId": 12566,
+      "checkedAt": "2026-09-27T04:39:21.067Z",
+      "status": "error",
+      "error": "Pinogy login failed: HTTP 403 from /apps/any/sessions: {\"error\": \"ERR_BAD_KEY\", \"request\": {\"method\": \"POST\", \"params\": {}}, \"httperror\": {\"name\": \"HTTPForbidden\", \"code\": 403}, \"message\": \"Wrong credentials\", \"data\": {}}"
+    },
+    {
+      "name": "Round Rock",
+      "url": "https://roundrock.puppydreams.com",
+      "group": "Texas",
+      "locationId": 14330,
+      "checkedAt": "2026-09-27T04:39:21.067Z",
+      "status": "error",
+      "error": "Pinogy login failed: HTTP 403 from /apps/any/sessions: {\"error\": \"ERR_BAD_KEY\", \"request\": {\"method\": \"POST\", \"params\": {}}, \"httperror\": {\"name\": \"HTTPForbidden\", \"code\": 403}, \"message\": \"Wrong credentials\", \"data\": {}}"
+    },
+    {
+      "name": "Katy",
+      "url": "https://katy.puppydreams.com",
+      "group": "Texas",
+      "locationId": 23625,
+      "checkedAt": "2026-09-27T04:39:21.067Z",
+      "status": "error",
+      "error": "Pinogy login failed: HTTP 403 from /apps/any/sessions: {\"error\": \"ERR_BAD_KEY\", \"request\": {\"method\": \"POST\", \"params\": {}}, \"httperror\": {\"name\": \"HTTPForbidden\", \"code\": 403}, \"message\": \"Wrong credentials\", \"data\": {}}"
+    },
+    {
+      "name": "Missouri City",
+      "url": "https://missouricity.puppydreams.com",
+      "group": "Texas",
+      "locationId": 13463,
+      "checkedAt": "2026-09-27T04:39:21.067Z",
+      "status": "error",
+      "error": "Pinogy login failed: HTTP 403 from /apps/any/sessions: {\"error\": \"ERR_BAD_KEY\", \"request\": {\"method\": \"POST\", \"params\": {}}, \"httperror\": {\"name\": \"HTTPForbidden\", \"code\": 403}, \"message\": \"Wrong credentials\", \"data\": {}}"
+    },
+    {
+      "name": "Junction City",
+      "url": "https://junctioncity.puppydreams.com",
+      "group": "Kansas",
+      "locationId": 6083,
+      "checkedAt": "2026-09-27T04:39:21.067Z",
+      "status": "error",
+      "error": "Pinogy login failed: HTTP 403 from /apps/any/sessions: {\"error\": \"ERR_BAD_KEY\", \"request\": {\"method\": \"POST\", \"params\": {}}, \"httperror\": {\"name\": \"HTTPForbidden\", \"code\": 403}, \"message\": \"Wrong credentials\", \"data\": {}}"
+    },
+    {
+      "name": "Wichita West",
+      "url": "https://westwichita.puppydreams.com",
+      "group": "Kansas",
+      "locationId": 1604,
+      "checkedAt": "2026-09-27T04:39:21.067Z",
+      "status": "error",
+      "error": "Pinogy login failed: HTTP 403 from /apps/any/sessions: {\"error\": \"ERR_BAD_KEY\", \"request\": {\"method\": \"POST\", \"params\": {}}, \"httperror\": {\"name\": \"HTTPForbidden\", \"code\": 403}, \"message\": \"Wrong credentials\", \"data\": {}}"
+    },
+    {
+      "name": "West Little Rock",
+      "url": "https://littlerockwest.puppydreams.com",
+      "group": "Arkansas",
+      "locationId": 7121,
+      "checkedAt": "2026-09-27T04:39:21.067Z",
+      "status": "error",
+      "error": "Pinogy login failed: HTTP 403 from /apps/any/sessions: {\"error\": \"ERR_BAD_KEY\", \"request\": {\"method\": \"POST\", \"params\": {}}, \"httperror\": {\"name\": \"HTTPForbidden\", \"code\": 403}, \"message\": \"Wrong credentials\", \"data\": {}}"
+    },
+    {
+      "name": "Cordova",
+      "url": "https://cordova.puppydreams.com",
+      "group": "Tennessee",
+      "locationId": 2371,
+      "checkedAt": "2026-09-27T04:39:21.067Z",
+      "status": "error",
+      "error": "Pinogy login failed: HTTP 403 from /apps/any/sessions: {\"error\": \"ERR_BAD_KEY\", \"request\": {\"method\": \"POST\", \"params\": {}}, \"httperror\": {\"name\": \"HTTPForbidden\", \"code\": 403}, \"message\": \"Wrong credentials\", \"data\": {}}"
+    },
+    {
+      "name": "Meridian",
+      "url": "https://meridian.puppydreams.com",
+      "group": "Idaho",
+      "locationId": 39019,
+      "checkedAt": "2026-09-27T04:39:21.067Z",
+      "status": "error",
+      "error": "Pinogy login failed: HTTP 403 from /apps/any/sessions: {\"error\": \"ERR_BAD_KEY\", \"request\": {\"method\": \"POST\", \"params\": {}}, \"httperror\": {\"name\": \"HTTPForbidden\", \"code\": 403}, \"message\": \"Wrong credentials\", \"data\": {}}"
+    },
+    {
+      "name": "Scottsdale",
+      "url": "https://scottsdale.puppydreams.com",
+      "group": "Arizona",
+      "locationId": 44184,
+      "checkedAt": "2026-09-27T04:39:21.067Z",
+      "status": "error",
+      "error": "Pinogy login failed: HTTP 403 from /apps/any/sessions: {\"error\": \"ERR_BAD_KEY\", \"request\": {\"method\": \"POST\", \"params\": {}}, \"httperror\": {\"name\": \"HTTPForbidden\", \"code\": 403}, \"message\": \"Wrong credentials\", \"data\": {}}"
+    }
+  ]
+}
