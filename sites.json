@@ -9,90 +9,105 @@
     "name": "Carrollton",
     "url": "https://carrollton.puppydreams.com",
     "group": "Texas",
-    "keyword": "Carrollton"
+    "keyword": "Carrollton",
+    "pinogyLocationId": 5174
   },
   {
     "name": "Arlington",
     "url": "https://arlington.puppydreams.com",
     "group": "Texas",
-    "keyword": "Arlington"
+    "keyword": "Arlington",
+    "pinogyLocationId": 1014
   },
   {
     "name": "Garland",
     "url": "https://garland.puppydreams.com",
     "group": "Texas",
-    "keyword": "Garland"
+    "keyword": "Garland",
+    "pinogyLocationId": 2151
   },
   {
     "name": "Denton",
     "url": "https://denton.puppydreams.com",
     "group": "Texas",
-    "keyword": "Denton"
+    "keyword": "Denton",
+    "pinogyLocationId": 7120
   },
   {
     "name": "Mansfield",
     "url": "https://mansfield.puppydreams.com",
     "group": "Texas",
-    "keyword": "Mansfield"
+    "keyword": "Mansfield",
+    "pinogyLocationId": 15262
   },
   {
     "name": "North Richland Hills",
     "url": "https://northrichlandhills.puppydreams.com",
     "group": "Texas",
-    "keyword": "North Richland Hills"
+    "keyword": "North Richland Hills",
+    "pinogyLocationId": 12566
   },
   {
     "name": "Round Rock",
     "url": "https://roundrock.puppydreams.com",
     "group": "Texas",
-    "keyword": "Round Rock"
+    "keyword": "Round Rock",
+    "pinogyLocationId": 14330
   },
   {
     "name": "Katy",
     "url": "https://katy.puppydreams.com",
     "group": "Texas",
-    "keyword": "Katy"
+    "keyword": "Katy",
+    "pinogyLocationId": 23625
   },
   {
     "name": "Missouri City",
     "url": "https://missouricity.puppydreams.com",
     "group": "Texas",
-    "keyword": "Missouri City"
+    "keyword": "Missouri City",
+    "pinogyLocationId": 13463
   },
   {
     "name": "Junction City",
     "url": "https://junctioncity.puppydreams.com",
     "group": "Kansas",
-    "keyword": "Junction City"
+    "keyword": "Junction City",
+    "pinogyLocationId": 6083
   },
   {
     "name": "Wichita West",
     "url": "https://westwichita.puppydreams.com",
     "group": "Kansas",
-    "keyword": "Wichita"
+    "keyword": "Wichita",
+    "pinogyLocationId": 1604
   },
   {
     "name": "West Little Rock",
     "url": "https://littlerockwest.puppydreams.com",
     "group": "Arkansas",
-    "keyword": "Little Rock"
+    "keyword": "Little Rock",
+    "pinogyLocationId": 7121
   },
   {
     "name": "Cordova",
     "url": "https://cordova.puppydreams.com",
     "group": "Tennessee",
-    "keyword": "Cordova"
+    "keyword": "Cordova",
+    "pinogyLocationId": 2371
   },
   {
     "name": "Meridian",
     "url": "https://meridian.puppydreams.com",
     "group": "Idaho",
-    "keyword": "Meridian"
+    "keyword": "Meridian",
+    "pinogyLocationId": 39019
   },
   {
     "name": "Scottsdale",
     "url": "https://scottsdale.puppydreams.com",
     "group": "Arizona",
-    "keyword": "Scottsdale"
+    "keyword": "Scottsdale",
+    "pinogyLocationId": 44184
   }
 ]

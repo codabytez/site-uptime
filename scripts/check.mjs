@@ -2,14 +2,15 @@
 // rewrites data/summary.json, which the dashboard reads.
 //
 // No dependencies: run with `node scripts/check.mjs` (Node 20+).
-// When GITHUB_TOKEN and GITHUB_REPOSITORY are set (as in GitHub Actions),
-// it also opens an issue when a site goes down and closes it on recovery.
+// In GitHub Actions it also opens an issue when a site goes down and closes
+// it on recovery (see github.mjs).
 
 import { readFile, writeFile, mkdir } from "node:fs/promises";
 import { existsSync } from "node:fs";
 import tls from "node:tls";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { alertsEnabled, openIssues, syncIssue } from "./github.mjs";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const SITES_FILE = process.env.SITES_FILE || path.join(ROOT, "sites.json");
@@ -116,46 +117,20 @@ function average(values) {
 
 // ---- GitHub issue alerts -------------------------------------------------
 
-const GH_TOKEN = process.env.GITHUB_TOKEN;
-const GH_REPO = process.env.GITHUB_REPOSITORY;
-const GH_API = process.env.GITHUB_API_URL || "https://api.github.com";
 const ALERT_LABEL = "downtime";
 
-async function gh(method, endpoint, body) {
-  const res = await fetch(`${GH_API}/repos/${GH_REPO}${endpoint}`, {
-    method,
-    headers: {
-      authorization: `Bearer ${GH_TOKEN}`,
-      accept: "application/vnd.github+json",
-      "content-type": "application/json",
-    },
-    body: body ? JSON.stringify(body) : undefined,
-  });
-  if (!res.ok) throw new Error(`GitHub ${method} ${endpoint}: ${res.status} ${await res.text()}`);
-  return res.status === 204 ? null : res.json();
-}
-
 async function syncAlerts(results) {
-  if (!GH_TOKEN || !GH_REPO) return;
+  if (!alertsEnabled) return;
   try {
-    const open = await gh("GET", `/issues?state=open&labels=${ALERT_LABEL}&per_page=100`);
+    const open = await openIssues(ALERT_LABEL);
     for (const site of results) {
-      const title = `🔴 ${site.name} is down`;
-      const issue = open.find((i) => i.title === title);
-      if (site.status === "down" && !issue) {
-        await gh("POST", "/issues", {
-          title,
-          labels: [ALERT_LABEL],
-          body: `**${site.url}** failed its uptime check.\n\n- Error: ${site.error}\n- HTTP code: ${site.code || "none"}\n- Response time: ${site.ms} ms\n- Detected: ${site.lastChecked}\n\nThis issue closes automatically when the site is back up.`,
-        });
-        console.log(`Opened downtime issue for ${site.name}`);
-      } else if (site.status !== "down" && issue) {
-        await gh("POST", `/issues/${issue.number}/comments`, {
-          body: `✅ **${site.name}** is back up (HTTP ${site.code}, ${site.ms} ms) as of ${site.lastChecked}.`,
-        });
-        await gh("PATCH", `/issues/${issue.number}`, { state: "closed" });
-        console.log(`Closed downtime issue for ${site.name}`);
-      }
+      await syncIssue(open, {
+        title: `🔴 ${site.name} is down`,
+        label: ALERT_LABEL,
+        active: site.status === "down",
+        body: `**${site.url}** failed its uptime check.\n\n- Error: ${site.error}\n- HTTP code: ${site.code || "none"}\n- Response time: ${site.ms} ms\n- Detected: ${site.lastChecked}\n\nThis issue closes automatically when the site is back up.`,
+        resolvedComment: `✅ **${site.name}** is back up (HTTP ${site.code}, ${site.ms} ms) as of ${site.lastChecked}.`,
+      });
     }
   } catch (err) {
     // Alerting must never stop the data from being saved.
