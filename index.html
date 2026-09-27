@@ -102,18 +102,33 @@
   .url { color: var(--muted); font-size: 13px; text-decoration: none; overflow-wrap: anywhere; }
   .url:hover { text-decoration: underline; }
   .err { color: var(--down); font-size: 13px; margin-top: 4px; }
-  .bars { display: flex; gap: 2px; height: 28px; align-items: stretch; }
-  .bars span { flex: 1; border-radius: 2px; background: var(--none); min-width: 2px; }
+  .bars { display: flex; gap: 2px; height: 28px; align-items: stretch; justify-content: flex-end; }
+  .bars span { flex: 1; border-radius: 2px; background: var(--none); min-width: 2px; max-width: 10px; }
   .bars span.ok { background: var(--up); }
   .bars span.slow { background: var(--slow); }
   .bars span.bad { background: var(--down); }
-  .bars-caption { display: flex; justify-content: space-between; color: var(--muted); font-size: 11px; margin-top: 4px; }
+  .bars-caption { display: flex; justify-content: flex-end; color: var(--muted); font-size: 11px; margin-top: 4px; }
   .stats { display: grid; grid-template-columns: 1.3fr 1fr 1fr 0.7fr; gap: 4px 18px; text-align: right; font-variant-numeric: tabular-nums; }
   .stats .k { color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: 0.04em; }
-  .stats .v { font-weight: 600; font-size: 14px; }
+  .stats .v { font-weight: 600; font-size: 14px; white-space: nowrap; }
   .warn { color: var(--slow); }
   .bad-text { color: var(--down); }
   .empty { color: var(--muted); padding: 40px 0; text-align: center; }
+  .inv { grid-column: 1 / -1; border-top: 1px solid var(--border); padding-top: 10px; font-size: 13px; }
+  .inv summary { cursor: pointer; list-style: none; display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: center; }
+  .inv summary::-webkit-details-marker { display: none; }
+  .inv:not([open]) summary .more::after { content: "Show details"; }
+  .inv[open] summary .more::after { content: "Hide details"; }
+  .inv .more { color: var(--muted); text-decoration: underline; }
+  .inv .plain { display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: center; }
+  .pill { font-weight: 600; padding: 2px 10px; border-radius: 999px; font-size: 12px; }
+  .pill.in_sync { background: var(--up-soft); color: var(--up); }
+  .pill.pending { background: var(--slow-soft); color: var(--slow); }
+  .pill.out_of_sync, .pill.error { background: var(--down-soft); color: var(--down); }
+  .inv h3 { font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); margin: 12px 0 4px; }
+  .inv ul { margin: 0; padding-left: 18px; }
+  .inv li { margin: 2px 0; }
+  .inv .id { color: var(--muted); font-variant-numeric: tabular-nums; }
   @media (max-width: 760px) {
     .site { grid-template-columns: 1fr; }
     .stats { grid-template-columns: repeat(4, 1fr); text-align: left; }
@@ -138,8 +153,12 @@
 </main>
 
 <script>
-const REFRESH_MS = 60000;
+const REFRESH_MS = 60000; // look for new data every minute (checks run every ~5 min)
+const STALE_MS = 20 * 60000; // checks normally land every ~5 min; warn if none for 20
+let lastVersion = "";
 let data = null;
+let inventory = null;
+const openDetails = new Set(); // keeps inventory panels open across re-renders
 let filter = "all";
 let query = "";
 
@@ -164,21 +183,57 @@ function duration(iso) {
   return `${Math.round(m / 1440)} days`;
 }
 
+const invFor = (site) => inventory?.stores?.find((x) => x.url === site.url);
+const invLabel = { in_sync: "Inventory in sync", pending: "Syncing…", out_of_sync: "Inventory out of sync", error: "Inventory check failed" };
+
+function inventoryRow(site) {
+  const inv = invFor(site);
+  if (!inv) return "";
+  const counts = inv.status === "error" ? "" : `<span>${inv.siteCount} on site · ${inv.pinogyCount} in Pinogy</span>`;
+  const checked = `<span class="meta">checked ${ago(inv.checkedAt)}</span>`;
+  const pill = `<span class="pill ${inv.status}">${invLabel[inv.status]}</span>`;
+  if (inv.status === "error") {
+    return `<div class="inv"><div class="plain">${pill}<span class="err">${esc(inv.error)}</span>${checked}</div></div>`;
+  }
+  const problems = [
+    inv.missing.length && `${inv.missing.length} missing`,
+    inv.stale.length && `${inv.stale.length} stale`,
+    inv.price.length && `${inv.price.length} price`,
+  ].filter(Boolean);
+  if (!problems.length) return `<div class="inv"><div class="plain">${pill}${counts}${checked}</div></div>`;
+
+  const item = (p, extra = "") => `<li>${esc(p.name || "(no name)")} · ${esc(p.breed || "unknown breed")} <span class="id">#${esc(p.id)}</span>${extra} <span class="meta">since ${ago(p.since)}</span></li>`;
+  const section = (title, list, fmt = (p) => item(p)) => list.length ? `<h3>${title} (${list.length})</h3><ul>${list.map(fmt).join("")}</ul>` : "";
+  return `
+    <details class="inv" data-url="${esc(site.url)}" ${openDetails.has(site.url) ? "open" : ""}>
+      <summary>${pill}<span class="${inv.status === "out_of_sync" ? "bad-text" : "warn"}">${problems.join(" · ")}</span>${counts}${checked}<span class="more"></span></summary>
+      ${section("In Pinogy, missing from the site", inv.missing)}
+      ${section("On the site, not available in Pinogy", inv.stale)}
+      ${section("Price differs", inv.price, (p) => item(p, ` — Pinogy $${p.price}, site $${p.sitePrice}`))}
+    </details>`;
+}
+
 function renderTotals(sites) {
   const down = sites.filter((s) => s.status === "down").length;
   const slow = sites.filter((s) => s.status === "slow").length;
   const avgUptime = sites.filter((s) => s.uptime.day != null);
   const uptimeDay = avgUptime.length ? avgUptime.reduce((a, s) => a + s.uptime.day, 0) / avgUptime.length : null;
   const times = sites.filter((s) => s.status !== "down").map((s) => s.ms);
+  const invStores = inventory?.stores || [];
+  const outOfSync = invStores.filter((x) => x.status === "out_of_sync" || x.status === "error").length;
 
   const banner = $("banner");
   banner.hidden = false;
   if (down) {
     banner.className = "banner down";
     banner.textContent = `${down} of ${sites.length} site${sites.length > 1 ? "s" : ""} down`;
-  } else if (slow) {
+  } else if (slow || outOfSync) {
     banner.className = "banner slow";
-    banner.textContent = `All sites up, ${slow} responding slowly`;
+    banner.textContent = [
+      "All sites up",
+      slow && `${slow} responding slowly`,
+      outOfSync && `${outOfSync} store${outOfSync > 1 ? "s" : ""} with inventory problems`,
+    ].filter(Boolean).join(" · ");
   } else {
     banner.className = "banner up";
     banner.textContent = `All ${sites.length} sites operational`;
@@ -190,13 +245,17 @@ function renderTotals(sites) {
     ["Down", down, down ? "bad-text" : ""],
     ["Uptime (24h)", pct(uptimeDay)],
     ["Avg response", times.length ? `${Math.round(times.reduce((a, b) => a + b, 0) / times.length)} ms` : "—"],
+    ...(invStores.length ? [["Inventory in sync", `${invStores.filter((x) => x.status === "in_sync").length}/${invStores.length}`, outOfSync ? "bad-text" : ""]] : []),
   ].map(([k, v, cls = ""]) => `<div class="tile"><div class="label">${k}</div><div class="value ${cls}">${v}</div></div>`).join("");
 }
+
+const hasInventoryProblem = (site) => ["out_of_sync", "pending", "error"].includes(invFor(site)?.status);
 
 function renderToolbar(sites) {
   const counts = { all: sites.length, down: 0, slow: 0, up: 0 };
   sites.forEach((s) => counts[s.status]++);
-  const buttons = [["all", "All"], ["down", "Down"], ["slow", "Slow"], ["up", "Up"]]
+  counts.inventory = sites.filter(hasInventoryProblem).length;
+  const buttons = [["all", "All"], ["down", "Down"], ["slow", "Slow"], ["up", "Up"], ...(inventory ? [["inventory", "Inventory issues"]] : [])]
     .map(([key, label]) => `<button data-filter="${key}" aria-pressed="${filter === key}">${label} ${counts[key]}</button>`).join("");
   const toolbar = $("toolbar");
   toolbar.querySelectorAll("button").forEach((b) => b.remove());
@@ -227,7 +286,7 @@ function siteRow(s) {
       </div>
       <div>
         <div class="bars" role="img" aria-label="Last ${s.recent.length} checks">${bars}</div>
-        <div class="bars-caption"><span>${firstT ? ago(new Date(firstT).toISOString()) : ""}</span><span>now</span></div>
+        <div class="bars-caption"><span>${firstT ? `${ago(new Date(firstT).toISOString())} → now` : ""}</span></div>
       </div>
       <div class="stats">
         <div class="k">Response</div><div class="k">24h</div><div class="k">7d</div><div class="k">SSL</div>
@@ -236,13 +295,14 @@ function siteRow(s) {
         <div class="v">${pct(s.uptime.week)}</div>
         <div class="v">${ssl}</div>
       </div>
+      ${inventoryRow(s)}
     </article>`;
 }
 
 function renderSites(sites) {
   const q = query.trim().toLowerCase();
   const shown = sites
-    .filter((s) => filter === "all" || s.status === filter)
+    .filter((s) => filter === "all" || s.status === filter || (filter === "inventory" && hasInventoryProblem(s)))
     .filter((s) => !q || s.name.toLowerCase().includes(q) || s.url.toLowerCase().includes(q))
     // Problems first, then alphabetical.
     .sort((a, b) => ({ down: 0, slow: 1, up: 2 }[a.status] - { down: 0, slow: 1, up: 2 }[b.status]) || a.name.localeCompare(b.name));
@@ -258,9 +318,19 @@ function renderSites(sites) {
     `<h2>${esc(group)} · ${list.length}</h2><div class="list">${list.map(siteRow).join("")}</div>`).join("");
 }
 
+function renderUpdated() {
+  if (!data) return;
+  const stale = Date.now() - new Date(data.generatedAt) > STALE_MS;
+  const el = $("updated");
+  el.className = stale ? "meta warn" : "meta";
+  el.textContent = stale
+    ? `⚠ Last checked ${ago(data.generatedAt)}; checks may be delayed or stopped. See the Actions tab on GitHub.`
+    : `Last checked ${ago(data.generatedAt)} · refreshes automatically`;
+}
+
 function render() {
   if (!data) return;
-  $("updated").textContent = `Last checked ${ago(data.generatedAt)} · refreshes automatically`;
+  renderUpdated();
   renderTotals(data.sites);
   renderToolbar(data.sites);
   renderSites(data.sites);
@@ -273,7 +343,18 @@ async function load() {
     const res = await fetch(`data/summary.json?t=${Date.now()}`, { cache: "no-store" });
     if (!res.ok) throw new Error(res.status);
     data = await res.json();
-    render();
+    // Inventory data is optional: it only exists once Pinogy secrets are configured.
+    inventory = await fetch(`data/inventory.json?t=${Date.now()}`, { cache: "no-store" })
+      .then((r) => (r.ok ? r.json() : inventory))
+      .catch(() => inventory);
+    // Only rebuild the page when a check has produced new data.
+    const version = `${data.generatedAt}|${inventory?.generatedAt || ""}`;
+    if (version !== lastVersion) {
+      lastVersion = version;
+      render();
+    } else {
+      renderUpdated();
+    }
   } catch {
     if (!data) {
       $("updated").textContent = "No data yet — the first check hasn't run.";
@@ -288,11 +369,16 @@ $("toolbar").addEventListener("click", (e) => {
   filter = btn.dataset.filter;
   render();
 });
+// "toggle" doesn't bubble, so listen in the capture phase.
+document.addEventListener("toggle", (e) => {
+  const url = e.target.dataset?.url;
+  if (url) e.target.open ? openDetails.add(url) : openDetails.delete(url);
+}, true);
 $("search").addEventListener("input", (e) => { query = e.target.value; render(); });
 
 load();
 setInterval(load, REFRESH_MS);
-setInterval(render, 15000); // keep "x min ago" text fresh between loads
+setInterval(renderUpdated, 30000); // keep the "Last checked" time current between loads
 </script>
 </body>
 </html>

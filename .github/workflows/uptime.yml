@@ -21,7 +21,7 @@ concurrency:
 jobs:
   check:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v7
 
@@ -34,6 +34,16 @@ jobs:
         run: node scripts/check.mjs
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Check inventory against Pinogy (every 15 minutes)
+        run: node scripts/inventory.mjs
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          FORCE_INVENTORY: ${{ github.event_name == 'workflow_dispatch' }}
+          PINOGY_API_HOST: ${{ secrets.PINOGY_API_HOST }}
+          PINOGY_ACCESS_KEY: ${{ secrets.PINOGY_ACCESS_KEY }}
+          PINOGY_SECRET: ${{ secrets.PINOGY_SECRET }}
+          PINOGY_PASSWORD: ${{ secrets.PINOGY_PASSWORD }}
 
       - name: Save history
         run: |
