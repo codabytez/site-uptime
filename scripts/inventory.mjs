@@ -110,6 +110,17 @@ function pinogyToken() {
   return tokenPromise;
 }
 
+// Short SHA-256 fingerprints let us check which saved secret differs from the
+// expected value without ever printing a secret (the hash can't be reversed).
+function logFingerprints() {
+  const fp = (v) => (v ? crypto.createHash("sha256").update(v).digest("hex").slice(0, 8) : "(empty)");
+  console.log("Login failed. Secret fingerprints (sha256, first 8 characters):");
+  console.log(`  PINOGY_API_HOST    ${fp(env.host)}`);
+  console.log(`  PINOGY_ACCESS_KEY  ${fp(env.accessKey)}`);
+  console.log(`  PINOGY_SECRET      ${fp(env.secret)}`);
+  console.log(`  PINOGY_PASSWORD    ${fp(env.password)}`);
+}
+
 async function login() {
   const timestamp = new Date().toISOString();
   const signature = crypto.createHmac("sha256", env.secret).update(`${env.accessKey}${timestamp}`).digest("hex");
@@ -126,6 +137,7 @@ async function login() {
       os: env.os,
     }),
   }).catch((err) => {
+    logFingerprints();
     throw new Error(`Pinogy login failed: ${err.message}`);
   });
   const token = data?.token || data?.data?.token || data?.data?.session?.token || data?.session?.token;
