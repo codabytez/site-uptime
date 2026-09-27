@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-27T05:00:02.362Z",
+  "generatedAt": "2026-09-27T10:00:13.086Z",
   "sites": [
     {
       "name": "Puppy Dreams",
@@ -8,16 +8,16 @@
       "slug": "puppy-dreams",
       "status": "up",
       "code": 200,
-      "ms": 898,
+      "ms": 1280,
       "error": null,
-      "lastChecked": "2026-09-27T05:00:02.362Z",
+      "lastChecked": "2026-09-27T10:00:13.086Z",
       "since": "2026-09-27T04:18:17.210Z",
       "uptime": {
         "day": 100,
         "week": 100,
         "month": 100
       },
-      "avgMs": 1077,
+      "avgMs": 1103,
       "sslExpires": "2026-12-07T03:07:44.000Z",
       "sslDaysLeft": 70,
       "recent": [
@@ -55,6 +55,11 @@
           1790485202362,
           1,
           898
+        ],
+        [
+          1790503213086,
+          1,
+          1280
         ]
       ]
     },
@@ -65,16 +70,16 @@
       "slug": "carrollton",
       "status": "up",
       "code": 200,
-      "ms": 304,
+      "ms": 1769,
       "error": null,
-      "lastChecked": "2026-09-27T05:00:02.362Z",
+      "lastChecked": "2026-09-27T10:00:13.086Z",
       "since": "2026-09-27T04:18:17.210Z",
       "uptime": {
         "day": 100,
         "week": 100,
         "month": 100
       },
-      "avgMs": 359,
+      "avgMs": 535,
       "sslExpires": "2026-12-22T17:36:21.000Z",
       "sslDaysLeft": 86,
       "recent": [
@@ -112,6 +117,11 @@
           1790485202362,
           1,
           304
+        ],
+        [
+          1790503213086,
+          1,
+          1769
         ]
       ]
     },
@@ -122,16 +132,16 @@
       "slug": "arlington",
       "status": "up",
       "code": 200,
-      "ms": 288,
+      "ms": 992,
       "error": null,
-      "lastChecked": "2026-09-27T05:00:02.362Z",
+      "lastChecked": "2026-09-27T10:00:13.086Z",
       "since": "2026-09-27T04:18:17.210Z",
       "uptime": {
         "day": 100,
         "week": 100,
         "month": 100
       },
-      "avgMs": 405,
+      "avgMs": 478,
       "sslExpires": "2026-11-15T18:08:49.000Z",
       "sslDaysLeft": 49,
       "recent": [
@@ -169,6 +179,11 @@
           1790485202362,
           1,
           288
+        ],
+        [
+          1790503213086,
+          1,
+          992
         ]
       ]
     },
@@ -179,16 +194,16 @@
       "slug": "garland",
       "status": "up",
       "code": 200,
-      "ms": 274,
+      "ms": 1814,
       "error": null,
-      "lastChecked": "2026-09-27T05:00:02.362Z",
+      "lastChecked": "2026-09-27T10:00:13.086Z",
       "since": "2026-09-27T04:18:17.210Z",
       "uptime": {
         "day": 100,
         "week": 100,
         "month": 100
       },
-      "avgMs": 381,
+      "avgMs": 560,
       "sslExpires": "2026-11-18T12:28:35.000Z",
       "sslDaysLeft": 52,
       "recent": [
@@ -226,6 +241,11 @@
           1790485202362,
           1,
           274
+        ],
+        [
+          1790503213086,
+          1,
+          1814
         ]
       ]
     },
@@ -236,16 +256,16 @@
       "slug": "denton",
       "status": "up",
       "code": 200,
-      "ms": 380,
+      "ms": 1140,
       "error": null,
-      "lastChecked": "2026-09-27T05:00:02.362Z",
+      "lastChecked": "2026-09-27T10:00:13.086Z",
       "since": "2026-09-27T04:18:17.210Z",
       "uptime": {
         "day": 100,
         "week": 100,
         "month": 100
       },
-      "avgMs": 531,
+      "avgMs": 608,
       "sslExpires": "2026-11-16T14:39:40.000Z",
       "sslDaysLeft": 50,
       "recent": [
@@ -283,6 +303,11 @@
           1790485202362,
           1,
           380
+        ],
+        [
+          1790503213086,
+          1,
+          1140
         ]
       ]
     },
@@ -293,16 +318,16 @@
       "slug": "mansfield",
       "status": "up",
       "code": 200,
-      "ms": 458,
+      "ms": 1859,
       "error": null,
-      "lastChecked": "2026-09-27T05:00:02.362Z",
+      "lastChecked": "2026-09-27T10:00:13.086Z",
       "since": "2026-09-27T04:18:17.210Z",
       "uptime": {
         "day": 100,
         "week": 100,
         "month": 100
       },
-      "avgMs": 723,
+      "avgMs": 865,
       "sslExpires": "2026-11-13T01:23:02.000Z",
       "sslDaysLeft": 46,
       "recent": [
@@ -340,6 +365,11 @@
           1790485202362,
           1,
           458
+        ],
+        [
+          1790503213086,
+          1,
+          1859
         ]
       ]
     },
@@ -350,16 +380,16 @@
       "slug": "north-richland-hills",
       "status": "up",
       "code": 200,
-      "ms": 515,
+      "ms": 1167,
       "error": null,
-      "lastChecked": "2026-09-27T05:00:02.362Z",
+      "lastChecked": "2026-09-27T10:00:13.086Z",
       "since": "2026-09-27T04:18:17.210Z",
       "uptime": {
         "day": 100,
         "week": 100,
         "month": 100
       },
-      "avgMs": 638,
+      "avgMs": 705,
       "sslExpires": "2026-11-15T11:08:24.000Z",
       "sslDaysLeft": 49,
       "recent": [
@@ -397,6 +427,11 @@
           1790485202362,
           1,
           515
+        ],
+        [
+          1790503213086,
+          1,
+          1167
         ]
       ]
     },
@@ -407,16 +442,16 @@
       "slug": "round-rock",
       "status": "up",
       "code": 200,
-      "ms": 599,
+      "ms": 1828,
       "error": null,
-      "lastChecked": "2026-09-27T05:00:02.362Z",
+      "lastChecked": "2026-09-27T10:00:13.086Z",
       "since": "2026-09-27T04:18:17.210Z",
       "uptime": {
         "day": 100,
         "week": 100,
         "month": 100
       },
-      "avgMs": 662,
+      "avgMs": 808,
       "sslExpires": "2026-11-17T01:12:54.000Z",
       "sslDaysLeft": 50,
       "recent": [
@@ -454,6 +489,11 @@
           1790485202362,
           1,
           599
+        ],
+        [
+          1790503213086,
+          1,
+          1828
         ]
       ]
     },
@@ -464,18 +504,18 @@
       "slug": "katy",
       "status": "up",
       "code": 200,
-      "ms": 544,
+      "ms": 1211,
       "error": null,
-      "lastChecked": "2026-09-27T05:00:02.362Z",
+      "lastChecked": "2026-09-27T10:00:13.086Z",
       "since": "2026-09-27T04:18:17.210Z",
       "uptime": {
         "day": 100,
         "week": 100,
         "month": 100
       },
-      "avgMs": 728,
+      "avgMs": 788,
       "sslExpires": "2026-11-17T05:32:50.000Z",
-      "sslDaysLeft": 51,
+      "sslDaysLeft": 50,
       "recent": [
         [
           1790482697210,
@@ -511,6 +551,11 @@
           1790485202362,
           1,
           544
+        ],
+        [
+          1790503213086,
+          1,
+          1211
         ]
       ]
     },
@@ -521,16 +566,16 @@
       "slug": "missouri-city",
       "status": "up",
       "code": 200,
-      "ms": 663,
+      "ms": 1849,
       "error": null,
-      "lastChecked": "2026-09-27T05:00:02.362Z",
+      "lastChecked": "2026-09-27T10:00:13.086Z",
       "since": "2026-09-27T04:18:17.210Z",
       "uptime": {
         "day": 100,
         "week": 100,
         "month": 100
       },
-      "avgMs": 839,
+      "avgMs": 965,
       "sslExpires": "2026-11-10T04:54:27.000Z",
       "sslDaysLeft": 43,
       "recent": [
@@ -568,6 +613,11 @@
           1790485202362,
           1,
           663
+        ],
+        [
+          1790503213086,
+          1,
+          1849
         ]
       ]
     },
@@ -578,16 +628,16 @@
       "slug": "junction-city",
       "status": "up",
       "code": 200,
-      "ms": 656,
+      "ms": 1828,
       "error": null,
-      "lastChecked": "2026-09-27T05:00:02.362Z",
+      "lastChecked": "2026-09-27T10:00:13.086Z",
       "since": "2026-09-27T04:18:17.210Z",
       "uptime": {
         "day": 100,
         "week": 100,
         "month": 100
       },
-      "avgMs": 792,
+      "avgMs": 922,
       "sslExpires": "2026-11-13T14:04:33.000Z",
       "sslDaysLeft": 47,
       "recent": [
@@ -625,6 +675,11 @@
           1790485202362,
           1,
           656
+        ],
+        [
+          1790503213086,
+          1,
+          1828
         ]
       ]
     },
@@ -635,16 +690,16 @@
       "slug": "wichita-west",
       "status": "up",
       "code": 200,
-      "ms": 613,
+      "ms": 1259,
       "error": null,
-      "lastChecked": "2026-09-27T05:00:02.362Z",
+      "lastChecked": "2026-09-27T10:00:13.086Z",
       "since": "2026-09-27T04:18:17.210Z",
       "uptime": {
         "day": 100,
         "week": 100,
         "month": 100
       },
-      "avgMs": 944,
+      "avgMs": 983,
       "sslExpires": "2026-11-13T14:08:04.000Z",
       "sslDaysLeft": 47,
       "recent": [
@@ -682,6 +737,11 @@
           1790485202362,
           1,
           613
+        ],
+        [
+          1790503213086,
+          1,
+          1259
         ]
       ]
     },
@@ -692,16 +752,16 @@
       "slug": "west-little-rock",
       "status": "up",
       "code": 200,
-      "ms": 697,
+      "ms": 1335,
       "error": null,
-      "lastChecked": "2026-09-27T05:00:02.362Z",
+      "lastChecked": "2026-09-27T10:00:13.086Z",
       "since": "2026-09-27T04:18:17.210Z",
       "uptime": {
         "day": 100,
         "week": 100,
         "month": 100
       },
-      "avgMs": 998,
+      "avgMs": 1040,
       "sslExpires": "2026-11-13T04:52:11.000Z",
       "sslDaysLeft": 46,
       "recent": [
@@ -739,6 +799,11 @@
           1790485202362,
           1,
           697
+        ],
+        [
+          1790503213086,
+          1,
+          1335
         ]
       ]
     },
@@ -749,16 +814,16 @@
       "slug": "cordova",
       "status": "up",
       "code": 200,
-      "ms": 605,
+      "ms": 1896,
       "error": null,
-      "lastChecked": "2026-09-27T05:00:02.362Z",
+      "lastChecked": "2026-09-27T10:00:13.086Z",
       "since": "2026-09-27T04:18:17.210Z",
       "uptime": {
         "day": 100,
         "week": 100,
         "month": 100
       },
-      "avgMs": 905,
+      "avgMs": 1029,
       "sslExpires": "2026-11-15T00:37:08.000Z",
       "sslDaysLeft": 48,
       "recent": [
@@ -796,6 +861,11 @@
           1790485202362,
           1,
           605
+        ],
+        [
+          1790503213086,
+          1,
+          1896
         ]
       ]
     },
@@ -806,18 +876,18 @@
       "slug": "meridian",
       "status": "up",
       "code": 200,
-      "ms": 806,
+      "ms": 1422,
       "error": null,
-      "lastChecked": "2026-09-27T05:00:02.362Z",
+      "lastChecked": "2026-09-27T10:00:13.086Z",
       "since": "2026-09-27T04:18:17.210Z",
       "uptime": {
         "day": 100,
         "week": 100,
         "month": 100
       },
-      "avgMs": 906,
+      "avgMs": 971,
       "sslExpires": "2026-11-08T09:54:02.000Z",
-      "sslDaysLeft": 42,
+      "sslDaysLeft": 41,
       "recent": [
         [
           1790482697210,
@@ -853,6 +923,11 @@
           1790485202362,
           1,
           806
+        ],
+        [
+          1790503213086,
+          1,
+          1422
         ]
       ]
     },
@@ -863,16 +938,16 @@
       "slug": "scottsdale",
       "status": "up",
       "code": 200,
-      "ms": 697,
+      "ms": 1906,
       "error": null,
-      "lastChecked": "2026-09-27T05:00:02.362Z",
+      "lastChecked": "2026-09-27T10:00:13.086Z",
       "since": "2026-09-27T04:18:17.210Z",
       "uptime": {
         "day": 100,
         "week": 100,
         "month": 100
       },
-      "avgMs": 929,
+      "avgMs": 1052,
       "sslExpires": "2026-11-02T14:28:23.000Z",
       "sslDaysLeft": 36,
       "recent": [
@@ -910,6 +985,11 @@
           1790485202362,
           1,
           697
+        ],
+        [
+          1790503213086,
+          1,
+          1906
         ]
       ]
     }
