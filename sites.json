@@ -2,11 +2,97 @@
   {
     "name": "Puppy Dreams",
     "url": "https://puppydreams.com",
-    "group": "Main"
+    "group": "Main",
+    "keyword": "Puppy Dreams"
   },
   {
-    "name": "Puppy Dreams Carlton",
-    "url": "https://carlton.puppydreams.com",
-    "group": "Locations"
+    "name": "Carrollton",
+    "url": "https://carrollton.puppydreams.com",
+    "group": "Texas",
+    "keyword": "Carrollton"
+  },
+  {
+    "name": "Arlington",
+    "url": "https://arlington.puppydreams.com",
+    "group": "Texas",
+    "keyword": "Arlington"
+  },
+  {
+    "name": "Garland",
+    "url": "https://garland.puppydreams.com",
+    "group": "Texas",
+    "keyword": "Garland"
+  },
+  {
+    "name": "Denton",
+    "url": "https://denton.puppydreams.com",
+    "group": "Texas",
+    "keyword": "Denton"
+  },
+  {
+    "name": "Mansfield",
+    "url": "https://mansfield.puppydreams.com",
+    "group": "Texas",
+    "keyword": "Mansfield"
+  },
+  {
+    "name": "North Richland Hills",
+    "url": "https://northrichlandhills.puppydreams.com",
+    "group": "Texas",
+    "keyword": "North Richland Hills"
+  },
+  {
+    "name": "Round Rock",
+    "url": "https://roundrock.puppydreams.com",
+    "group": "Texas",
+    "keyword": "Round Rock"
+  },
+  {
+    "name": "Katy",
+    "url": "https://katy.puppydreams.com",
+    "group": "Texas",
+    "keyword": "Katy"
+  },
+  {
+    "name": "Missouri City",
+    "url": "https://missouricity.puppydreams.com",
+    "group": "Texas",
+    "keyword": "Missouri City"
+  },
+  {
+    "name": "Junction City",
+    "url": "https://junctioncity.puppydreams.com",
+    "group": "Kansas",
+    "keyword": "Junction City"
+  },
+  {
+    "name": "Wichita West",
+    "url": "https://westwichita.puppydreams.com",
+    "group": "Kansas",
+    "keyword": "Wichita"
+  },
+  {
+    "name": "West Little Rock",
+    "url": "https://littlerockwest.puppydreams.com",
+    "group": "Arkansas",
+    "keyword": "Little Rock"
+  },
+  {
+    "name": "Cordova",
+    "url": "https://cordova.puppydreams.com",
+    "group": "Tennessee",
+    "keyword": "Cordova"
+  },
+  {
+    "name": "Meridian",
+    "url": "https://meridian.puppydreams.com",
+    "group": "Idaho",
+    "keyword": "Meridian"
+  },
+  {
+    "name": "Scottsdale",
+    "url": "https://scottsdale.puppydreams.com",
+    "group": "Arizona",
+    "keyword": "Scottsdale"
   }
 ]

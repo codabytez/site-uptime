@@ -14,9 +14,10 @@ Add an entry to `sites.json` and push:
 
 ```json
 {
-  "name": "Puppy Dreams Carlton",
-  "url": "https://carlton.puppydreams.com",
-  "group": "Locations"
+  "name": "Carrollton",
+  "url": "https://carrollton.puppydreams.com",
+  "group": "Texas",
+  "keyword": "Carrollton"
 }
 ```
 
