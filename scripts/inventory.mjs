@@ -34,11 +34,22 @@ const USER_AGENT = "Mozilla/5.0 (compatible; SiteUptimeMonitor/1.0)";
 const ALERT_LABEL = "inventory";
 const MINUTE = 60 * 1000;
 
+// Values pasted into GitHub secrets easily pick up a trailing space, line break
+// or the quotes from a .env file, and GitHub never shows them again. Strip those.
+const cleaned = [];
+function secret(name) {
+  const raw = process.env[name];
+  if (raw == null) return raw;
+  const value = raw.trim().replace(/^["'`]+|["'`]+$/g, "").trim();
+  if (value !== raw) cleaned.push(name);
+  return value;
+}
+
 const env = {
-  host: process.env.PINOGY_API_HOST?.replace(/\/+$/, ""),
-  accessKey: process.env.PINOGY_ACCESS_KEY,
-  secret: process.env.PINOGY_SECRET,
-  password: process.env.PINOGY_PASSWORD,
+  host: secret("PINOGY_API_HOST")?.replace(/\/+$/, ""),
+  accessKey: secret("PINOGY_ACCESS_KEY"),
+  secret: secret("PINOGY_SECRET"),
+  password: secret("PINOGY_PASSWORD"),
   appId: process.env.PINOGY_APP_ID || "3",
   version: process.env.PINOGY_VERSION || "1.0",
   os: process.env.PINOGY_OS || "linux",
@@ -266,6 +277,11 @@ async function main() {
     console.log("Pinogy secrets not set (PINOGY_API_HOST, PINOGY_ACCESS_KEY, PINOGY_SECRET, PINOGY_PASSWORD); skipping inventory check.");
     return;
   }
+
+  // Names only, never values: tells us whether a secret was saved with extra characters.
+  console.log(cleaned.length
+    ? `Removed stray spaces/quotes from: ${cleaned.join(", ")}`
+    : "Pinogy secrets have no stray spaces or quotes.");
 
   const sites = JSON.parse(await readFile(SITES_FILE, "utf8")).filter((s) => s.pinogyLocationId);
   const now = new Date().toISOString();
